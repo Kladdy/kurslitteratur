@@ -1,0 +1,64 @@
+li a {
+    color: green;
+}
+a {
+    color: royalblue
+}
+input {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+.ui-autocomplete-input {
+    font-size:16px;
+    padding: 0px;
+    margin-top: -3px;
+    margin-bottom: 0;
+    height: 1.5em;   
+    
+}
+.ui-menu-item {
+    padding:0 .5em;
+    line-height:2em;
+    font-size:.8em;
+    width: 18em;
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.1em;
+    color: #555555;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.ui-state-focus{
+    background: black;
+}
+
+.ui-state-hover, .ui-state-active {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #2ba073;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    background-image: none;
+}
+
+.inline{
+    display : inline;
+    }
+
+.book_img {
+    width: 100%;
+    height: 255px;
+    object-fit: contain;
+    }
+
+.book_title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    }

@@ -1,0 +1,15 @@
+<!-- templates/marketplace/detail.html -->
+{% extends "marketplace/base.html" %}
+
+{% block title %}{{book.title}}{% endblock %}
+
+{% block content %}
+    <p>Title: {{book.title}}</p>
+    <p>ISBN: {{book.isbn}}</p>
+    <p>Authors: {{book.authors}}</p>
+    <p>Publisher: {{book.publisher}}</p>
+    <p>Year: {{book.year}}</p>
+    <p>Language: {{book.language}}</p>
+
+    <img src="{{ book.cover_img }}" />
+{% endblock %}

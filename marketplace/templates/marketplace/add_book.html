@@ -1,0 +1,19 @@
+<!-- templates/marketplace/add_book.html -->
+{% extends "marketplace/base.html" %}
+
+{% block title %}Add book{% endblock %}
+
+{% block content %}
+<div class="container">
+    Add a book by typing the ISBN number below
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'marketplace:isbn_lookup'%}" method="post">
+        {% csrf_token %}
+        <label for="isbn">ISBN:</label><br>
+        <input type="text" id="isbn" name="isbn"><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>     
+{% endblock %}

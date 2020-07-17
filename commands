@@ -1,0 +1,39 @@
+Start server with port 8000 with ip 0.0.0.0
+    python manage.py runserver 0.0.0.0:8000
+
+Doing migrations: 
+    1.  Change your models (in models.py).
+    2.  Run 
+            python manage.py makemigrations 
+        to create migrations for those changes
+    3.  Run 
+            python manage.py migrate 
+        to apply those changes to the database.
+
+Admin login:
+    Username:   admin
+    Password:   N/123
+
+---------------------------------------------------------------
+RESETTING DATABASE
+    Kill database connections:
+        SELECT 
+            pg_terminate_backend(pid) 
+        FROM 
+            pg_stat_activity 
+        WHERE 
+            pid <> pg_backend_pid()
+            AND datname = 'library';
+
+    Drop database:
+        DROP DATABASE library;
+
+    Create database and add privileges:
+        CREATE DATABASE library;
+        GRANT ALL PRIVILEGES ON DATABASE library TO librarian;
+
+    Then add empty file called __init__.py in migrations folder 
+    after deleing all migrations. Then run migration as usual
+
+See: https://stackoverflow.com/questions/46391330/relation-does-not-exist-error-in-django
+---------------------------------------------------------------

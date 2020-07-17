@@ -1,0 +1,94 @@
+<!-- templates/marketplace/browse.html -->
+{% extends "marketplace/base.html" %}
+
+{% load selectable_tags %}
+
+{% block title %}Browse{% endblock %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include_ui_theme %}
+    {{ form.media.css }}
+
+{% endblock %}
+
+{% block extra-css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'marketplace/css/browse_style.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Sök efter kurs</h3>
+
+    {% include_jquery_libs %}
+    {{ form.media.js }}
+
+    <form action="" method="GET" >
+        <!-- {% csrf_token %} -->
+        {{ form.as_p }}
+        <!--<button class="btn">Submit</button>-->
+    </form>
+
+    <br>
+
+    <div class="album py-5">
+        <div class="container">
+      
+          <div class="row">
+            {% for book in books %}
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img class="book_img" src="{{ book.get_cover_img_path }}"/>
+                <div class="card-body">
+                  <a href="{% url 'marketplace:detail'  book.id %}"><p class="book_title">{{book.title}}</p></a>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">{{book.year}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra-js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            function newParameters(query) {
+                query.university = $('#id_university').val();
+                query.programme = $('#id_programme').val();
+                query.semester = $('#id_semester').val();
+                query.course = $('#id_course').val();
+            }
+            $('#id_programme').djselectable('option', 'prepareQuery', newParameters);
+            $('#id_semester').djselectable('option', 'prepareQuery', newParameters);
+            $('#id_course').djselectable('option', 'prepareQuery', newParameters);
+            
+            $(':input[name=university]').bind('djselectableselect', function(event, ui) {
+                $('input[name=programme').val('');
+                $('input[name=semester').val('');
+                $('input[name=course').val('');
+            });
+            $(':input[name=programme]').bind('djselectableselect', function(event, ui) {
+                $('input[name=semester').val('');
+                $('input[name=course').val('');
+            });
+            $(':input[name=semester]').bind('djselectableselect', function(event, ui) {
+                $('input[name=course').val('');
+            });
+            $(':input[name=course]').bind('djselectableselect', function(event, ui) {
+                $(this).parents("form").submit();
+            });
+        });
+    </script>
+{% endblock %}

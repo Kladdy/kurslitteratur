@@ -1,0 +1,23 @@
+<!-- templates/marketplace/index.html -->
+{% extends "marketplace/base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block extra-css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'marketplace/css/index_style.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if latest_book_list %}
+        <ul>
+        {% for book in latest_book_list %}
+            <li><a href="{% url 'marketplace:detail'  book.id %}">{{ book.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books are available.</p>
+    {% endif %}
+</div>
+{% endblock %}
